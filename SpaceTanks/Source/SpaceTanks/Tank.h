@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "TankAimingComponent.h"
+
 #include "Tank.generated.h"
 
 UCLASS()
@@ -12,21 +14,24 @@ class SPACETANKS_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
-	ATank();
 
   void AimAt(FVector HitLocation);
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	
+  UTankAimingComponent* TankAimingComponent = nullptr;
+
 
 private:
+	// Sets default values for this pawn's properties
+	ATank();
+
   // Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaTime) override;
 	
 	
 };
