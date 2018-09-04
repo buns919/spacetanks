@@ -18,8 +18,6 @@ UTankAimingComponent::UTankAimingComponent()
 void UTankAimingComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// ...
 	
 }
 
@@ -34,5 +32,21 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 
 void UTankAimingComponent::AimAt(FVector HitLocation) {
   auto OurTankName = GetOwner()->GetName();
-  UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *OurTankName, *HitLocation.ToString());
+
+  if (!Barrel) {
+    UE_LOG(LogTemp, Error, TEXT("No barrel reference on: %s"), *OurTankName);
+    return;
+  }
+
+  FVector BarrelLocation = Barrel->GetComponentLocation();
+  if (BarrelLocation == FVector(0)) {
+    UE_LOG(LogTemp, Error, TEXT("Unable to retrieve BarrelLocation from Barrel->GetComponentLocation(): %s"), *OurTankName);
+    return;
+  }
+
+  UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s, from BarrelLocation: %s"), *OurTankName, *HitLocation.ToString(), *BarrelLocation.ToString());
+}
+
+void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent * BarrelToSet) {
+  Barrel = BarrelToSet;
 }
