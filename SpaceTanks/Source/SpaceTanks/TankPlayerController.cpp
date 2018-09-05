@@ -45,7 +45,7 @@ void ATankPlayerController::AimTowardsCrossHair() {
   }
 }
 
-// Get world location from linetrace through crosshair, true if it hits landscape
+// Get world location from linetrace through crosshair UI BP, true if it hits landscape
 bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const
 {
   // Find the crosshair position in pixel coordinates

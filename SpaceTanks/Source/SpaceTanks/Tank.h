@@ -36,6 +36,9 @@ private:
 
 	virtual void Tick(float DeltaTime) override;
 
-  UStaticMeshComponent* Barrel;	
+  UStaticMeshComponent* Barrel;
+
+  UPROPERTY(EditAnywhere, Category = Firing)
+  float FiringSpeed = 100000; // 1000 m/s - TODO find sensible default
 	
 };
